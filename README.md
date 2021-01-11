@@ -21,5 +21,9 @@
         3-2. brew install git-lfs 실행
         3-3. git-lfs install
     4. 프로젝트 폴더로 이동하여 pod install --repo-update 실행
+    
+   
+<img width="300" alt="스크린샷 2021-01-11 오후 10 02 09" src="https://user-images.githubusercontent.com/70695311/104185721-aeb6c180-5458-11eb-80f0-b31b986cdee9.png">
+
 
 
