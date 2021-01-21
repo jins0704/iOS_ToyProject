@@ -82,6 +82,7 @@ extension WeatherViewController : WeatherManagerDelegate{
 extension WeatherViewController : CLLocationManagerDelegate {
     
     @IBAction func locationPressed(_ sender: UIButton) {
+        print("got location")
         locationmanager.requestLocation()
     }
     
