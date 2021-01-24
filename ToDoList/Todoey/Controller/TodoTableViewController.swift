@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreData
 
 class TodoTableViewController: UITableViewController {
 
     var TodoList = Array<TodoItem>()
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItem.plist")
+   
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +30,11 @@ class TodoTableViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //what will happen once after click
-            let newItem = TodoItem()
-            newItem.Title = textField.text!
-
+            let newItem = TodoItem(context: self.context)
+            
+            newItem.title = textField.text!
+            newItem.check = false
+            
             self.TodoList.append(newItem)
            
             self.saveItem()
@@ -44,7 +49,7 @@ class TodoTableViewController: UITableViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Table view data source
+    // MARK: - Table view data source / delegate
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -60,46 +65,52 @@ class TodoTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todocell", for: indexPath)
         let item = TodoList[indexPath.row]
        
-        cell.textLabel?.text = item.Title
+        cell.textLabel?.text = item.title
         
-        cell.accessoryType = item.Check ? .checkmark : .none
-
+        cell.accessoryType = item.check ? .checkmark : .none
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        TodoList[indexPath.row].Check = !TodoList[indexPath.row].Check
+        TodoList[indexPath.row].check = !TodoList[indexPath.row].check
         
         saveItem()
         
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return " TodoList"
     }
 
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                context.delete(TodoList[indexPath.row])
+                TodoList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    
+    // MARK: - Coredata function
     func saveItem(){
-        let encoder = PropertyListEncoder()
         do{
-            let data = try encoder.encode(TodoList)
-            try data.write(to: dataFilePath!)
+            try context.save()
         }catch{
-            print("error")
+            print("save error")
         }
         self.tableView.reloadData()
     }
 
     func loadItems(){
-        if let data = try? Data(contentsOf: dataFilePath!){
-            let decoder = PropertyListDecoder()
-            
-            do{
-                TodoList = try decoder.decode([TodoItem].self, from: data)
-            }catch{
-                print("decode error")
-            }
+        let request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+        
+        do{
+            TodoList = try context.fetch(request)
+        }catch{
+            print("fetch error")
         }
         self.tableView.reloadData()
     }
