@@ -38,8 +38,8 @@
 * 앱 종료 후 다른 아이디로 들어가도 내용은 사라지지 않는다.
     - 회원정보와 메세지 내용은 Firebase를 이용하여 외부에 저장한다.
  
- <img width="300" alt="스크린샷 2021-01-23 오후 8 57 07" src="https://user-images.githubusercontent.com/70695311/105578337-b49a9400-5dc2-11eb-93c1-7b01767aed6f.png">
- <img width="300" alt="스크린샷 2021-01-23 오후 8 57 18" src="https://user-images.githubusercontent.com/70695311/105578338-b7958480-5dc2-11eb-9c74-137beec28ddd.png">
+ <img width="600" alt="스크린샷 2021-01-23 오후 8 57 07" src="https://user-images.githubusercontent.com/70695311/105578337-b49a9400-5dc2-11eb-93c1-7b01767aed6f.png">
+ <img width="600" alt="스크린샷 2021-01-23 오후 8 57 18" src="https://user-images.githubusercontent.com/70695311/105578338-b7958480-5dc2-11eb-9c74-137beec28ddd.png">
 
 #### What I learned
 - Third party libraries 
