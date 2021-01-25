@@ -9,18 +9,23 @@
 import UIKit
 import CoreData
 
-class TodoTableViewController: UITableViewController {
-
+class TodoTableViewController: UITableViewController, UISearchBarDelegate {
+    
+    var selecetedCategory : Category?{
+        didSet{
+            loadItems()
+        }
+    }
+    
+    @IBOutlet weak var searchbar: UISearchBar!
     var TodoList = Array<TodoItem>()
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItem.plist")
    
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadItems()
+        searchbar.delegate = self
     }
 
     @IBAction func addButtonPressed(_ sender: Any) {
@@ -34,7 +39,7 @@ class TodoTableViewController: UITableViewController {
             
             newItem.title = textField.text!
             newItem.check = false
-            
+            newItem.parentCategory = self.selecetedCategory
             self.TodoList.append(newItem)
            
             self.saveItem()
@@ -81,18 +86,14 @@ class TodoTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return " TodoList"
-    }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                context.delete(TodoList[indexPath.row])
-                TodoList.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
+        if editingStyle == .delete {
+            context.delete(TodoList[indexPath.row])
+            TodoList.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
+    }
     
     // MARK: - Coredata function
     func saveItem(){
@@ -103,60 +104,43 @@ class TodoTableViewController: UITableViewController {
         }
         self.tableView.reloadData()
     }
-
-    func loadItems(){
-        let request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+    func loadItems(with request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest(), predicate : NSPredicate? = nil){
+       
+        let categorypredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selecetedCategory!.name!)
+        
+        if let additionalPredicate = predicate{
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categorypredicate, additionalPredicate])
+        }else{
+            request.predicate = categorypredicate
+        }
         
         do{
             TodoList = try context.fetch(request)
         }catch{
             print("fetch error")
         }
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    // MARK: - Search bar methods
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let predicate = NSPredicate(format: "title Contains[cd] %@", searchbar.text!)
+        let request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+        request.predicate = predicate
+        
+        let descriptor = NSSortDescriptor(key: "title", ascending: true)
+        request.sortDescriptors = [descriptor]
+        
+        loadItems(with: request,predicate: predicate)
+        
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchbar.text?.count == 0{
+            loadItems()
+            
+            DispatchQueue.main.async {
+                self.searchbar.resignFirstResponder()
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
