@@ -7,18 +7,22 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
+import RealmSwift
 
 class TodoTableViewController: UITableViewController, UISearchBarDelegate {
     
-    var selecetedCategory : Category?{
+    let realm = try! Realm()
+    
+    var selectedCategory : CategoryRealm?{
         didSet{
             loadItems()
         }
     }
     
     @IBOutlet weak var searchbar: UISearchBar!
-    var TodoList = Array<TodoItem>()
+    //var TodoList = Array<TodoItem>()
+    var TodoList : Results<TodoItemRealm>?
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItem.plist")
    
@@ -35,14 +39,22 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //what will happen once after click
-            let newItem = TodoItem(context: self.context)
+            //let newItem = TodoItem(context: self.context)
+            if let currentCategory = self.selectedCategory{
+                do{
+                    try self.realm.write{
+                        let newItem = TodoItemRealm()
+                        newItem.title = textField.text!
+                        currentCategory.TodoItems.append(newItem)
+                    }
+                }catch{
+                    print("save error")
+                }
+            }
             
-            newItem.title = textField.text!
-            newItem.check = false
-            newItem.parentCategory = self.selecetedCategory
-            self.TodoList.append(newItem)
-           
-            self.saveItem()
+            self.tableView.reloadData()
+            //newItem.parentCategory = self.selecetedCategory
+            //self.TodoList.append(newItem)
         }
         
         alert.addTextField { (alertTextField) in
@@ -62,41 +74,63 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return TodoList.count
+        return TodoList?.count ?? 1
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "todocell", for: indexPath)
-        let item = TodoList[indexPath.row]
-       
-        cell.textLabel?.text = item.title
         
-        cell.accessoryType = item.check ? .checkmark : .none
+        if let item = TodoList?[indexPath.row]{
+            
+            cell.textLabel?.text = item.title
+            cell.accessoryType = item.check ? .checkmark : .none
+            
+        }else{
+            cell.textLabel?.text = "nothing"
+        }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        TodoList[indexPath.row].check = !TodoList[indexPath.row].check
-        
-        saveItem()
-        
-        tableView.deselectRow(at: indexPath, animated: true)
+        //TodoList[indexPath.row].check = !TodoList[indexPath.row].check
+        //saveItem()
+        if let item = TodoList?[indexPath.row]{
+            do{
+                try realm.write{
+                    item.check = !item.check
+                }
+            }catch{
+                print("save error")
+            }
+        }
+        tableView.reloadData()
+        //tableView.deselectRow(at: indexPath, animated: true)
         
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            context.delete(TodoList[indexPath.row])
-            TodoList.remove(at: indexPath.row)
+            //context.delete(TodoList[indexPath.row])
+            //TodoList.remove(at: indexPath.row)
+            if let item = TodoList?[indexPath.row]{
+                do{
+                    try realm.write{
+                        realm.delete(item)
+                    }
+                }catch{
+                    print("delete error")
+                }
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     // MARK: - Coredata function
-    func saveItem(){
+    
+    /*func saveItem(){
         do{
             try context.save()
         }catch{
@@ -106,7 +140,7 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
     }
     func loadItems(with request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest(), predicate : NSPredicate? = nil){
        
-        let categorypredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selecetedCategory!.name!)
+        //let categorypredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selecetedCategory!.name!)
         
         if let additionalPredicate = predicate{
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categorypredicate, additionalPredicate])
@@ -120,18 +154,23 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
             print("fetch error")
         }
         tableView.reloadData()
+    }*/
+    
+    func loadItems(){
+        tableView.reloadData()
+        TodoList = selectedCategory?.TodoItems.sorted(byKeyPath: "title", ascending: true)
+        
     }
     
     // MARK: - Search bar methods
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let predicate = NSPredicate(format: "title Contains[cd] %@", searchbar.text!)
-        let request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
-        request.predicate = predicate
+        //let predicate = NSPredicate(format: "title Contains[cd] %@", searchbar.text!)
+        //let request : NSFetchRequest<TodoItem> = TodoItem.fetchRequest()
+        //request.predicate = predicate
+        //let descriptor = NSSortDescriptor(key: "title", ascending: true)
+        //request.sortDescriptors = [descriptor]
         
-        let descriptor = NSSortDescriptor(key: "title", ascending: true)
-        request.sortDescriptors = [descriptor]
-        
-        loadItems(with: request,predicate: predicate)
+        //loadItems(with: request,predicate: predicate)
         
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

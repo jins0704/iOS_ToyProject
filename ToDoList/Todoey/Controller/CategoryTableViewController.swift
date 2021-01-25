@@ -7,13 +7,16 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
+import RealmSwift
 
 class CategoryTableViewController: UITableViewController {
 
-    var CategoryList = Array<Category>()
-
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let realm = try! Realm()
+    
+    //var CategoryList = Array<Category>()
+    var CategoryList : Results<CategoryRealm>?
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,12 +31,14 @@ class CategoryTableViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Category", style: .default) { (action) in
             //what will happen once after click
-            let newCategory = Category(context: self.context)
+            
+            //let newCategory = Category(context: self.context)
+            let newCategory = CategoryRealm()
             newCategory.name = textField.text!
             
-            self.CategoryList.append(newCategory)
+            //self.CategoryList.append(newCategory)
             
-            self.saveCategory()
+            self.saveCategory(category: newCategory)
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "create new Category"
@@ -43,7 +48,7 @@ class CategoryTableViewController: UITableViewController {
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-        
+    
     // MARK: - Table view data source, delegate
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -53,21 +58,39 @@ class CategoryTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return CategoryList.count
+        return CategoryList?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categorycell", for: indexPath)
         
-        cell.textLabel?.text = CategoryList[indexPath.row].name
+        cell.textLabel?.text = CategoryList?[indexPath.row].name ?? "Nothing"
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            context.delete(CategoryList[indexPath.row])
-            CategoryList.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            //context.delete(CategoryList[indexPath.row])
+            if let category = CategoryList?[indexPath.row]{
+                do{
+                    for item in category.TodoItems{
+                        do{
+                            try realm.write{
+                                realm.delete(item)
+                            }
+                        }catch{
+                            print("item delete error")
+                        }
+                    }
+                    try realm.write{
+                        realm.delete(category)
+                    }
+                }catch{
+                    print("delete error")
+                }
+                //CategoryList.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         }
     }
     
@@ -79,26 +102,36 @@ class CategoryTableViewController: UITableViewController {
         let dest = segue.destination as! TodoTableViewController
         
         if let indexPath = tableView.indexPathForSelectedRow{
-            dest.selecetedCategory = CategoryList[indexPath.row]
+            dest.selectedCategory = CategoryList?[indexPath.row]
         }
     }
     
     
     // MARK: - Coredata function
-    func saveCategory(){
+    func saveCategory(category: CategoryRealm){
         do{
-            try context.save()
+            //try context.save()
+            try realm.write{
+                realm.add(category)
+            }
         }catch{
             print("save error")
         }
         self.tableView.reloadData()
     }
-    func loadCategory(with request : NSFetchRequest<Category> = Category.fetchRequest()){
+    
+    /*func loadCategory(with request : NSFetchRequest<Category> = Category.fetchRequest()){
         do{
-            CategoryList = try context.fetch(request)
+           //CategoryList = try context.fetch(request)
         }catch{
             print("fetch error")
         }
+        tableView.reloadData()
+    }*/
+    
+    func loadCategory(){
+        CategoryList = realm.objects(CategoryRealm.self)
+        
         tableView.reloadData()
     }
 }
