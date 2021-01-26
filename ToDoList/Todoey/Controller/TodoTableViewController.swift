@@ -9,6 +9,7 @@
 import UIKit
 //import CoreData
 import RealmSwift
+import ChameleonFramework
 
 class TodoTableViewController: UITableViewController, UISearchBarDelegate {
     
@@ -19,17 +20,25 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
             loadItems()
         }
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        if let color = selectedCategory?.hexColor{
+            navigationController?.navigationBar.barTintColor = UIColor(hexString: color)
+            title = selectedCategory?.name
+        }
+    }
     @IBOutlet weak var searchbar: UISearchBar!
     //var TodoList = Array<TodoItem>()
     var TodoList : Results<TodoItemRealm>?
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("TodoItem.plist")
    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    //let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
         super.viewDidLoad()
         searchbar.delegate = self
+        
+        tableView.rowHeight = 80
+        tableView.separatorStyle = .none
     }
 
     @IBAction func addButtonPressed(_ sender: Any) {
@@ -45,6 +54,7 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
                     try self.realm.write{
                         let newItem = TodoItemRealm()
                         newItem.title = textField.text!
+                        newItem.dataCreated = Date()
                         currentCategory.TodoItems.append(newItem)
                     }
                 }catch{
@@ -85,6 +95,8 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
             
             cell.textLabel?.text = item.title
             cell.accessoryType = item.check ? .checkmark : .none
+            cell.backgroundColor = UIColor(hexString: selectedCategory!.hexColor)?.darken(byPercentage: CGFloat(indexPath.row)/CGFloat(TodoList!.count))
+            cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor ?? UIColor.black, returnFlat: true)
             
         }else{
             cell.textLabel?.text = "nothing"
@@ -157,9 +169,8 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
     }*/
     
     func loadItems(){
-        tableView.reloadData()
         TodoList = selectedCategory?.TodoItems.sorted(byKeyPath: "title", ascending: true)
-        
+        tableView.reloadData()
     }
     
     // MARK: - Search bar methods
@@ -171,15 +182,14 @@ class TodoTableViewController: UITableViewController, UISearchBarDelegate {
         //request.sortDescriptors = [descriptor]
         
         //loadItems(with: request,predicate: predicate)
-        
+        TodoList = TodoList?.filter("title Contains[cd] %@", searchbar.text!).sorted(byKeyPath: "dataCreated", ascending: true)
+        tableView.reloadData()
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchbar.text?.count == 0{
+            
             loadItems()
             
-            DispatchQueue.main.async {
-                self.searchbar.resignFirstResponder()
-            }
         }
     }
 }

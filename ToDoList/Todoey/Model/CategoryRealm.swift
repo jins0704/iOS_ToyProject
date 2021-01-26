@@ -11,6 +11,6 @@ import RealmSwift
 
 class CategoryRealm : Object{
     @objc dynamic var name : String = ""
-    
+    @objc dynamic var hexColor : String = ""
     let TodoItems = List<TodoItemRealm>()
 }

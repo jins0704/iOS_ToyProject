@@ -9,6 +9,7 @@
 import UIKit
 //import CoreData
 import RealmSwift
+import ChameleonFramework
 
 class CategoryTableViewController: UITableViewController {
 
@@ -22,8 +23,13 @@ class CategoryTableViewController: UITableViewController {
         super.viewDidLoad()
         
         loadCategory()
+        tableView.rowHeight = 80
+        tableView.separatorStyle = .none
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.barTintColor = UIColor(hexString: "1D9Bf6")
+    }
     @IBAction func addButtonPressed(_ sender: Any) {
         var textField = UITextField()
         
@@ -35,6 +41,7 @@ class CategoryTableViewController: UITableViewController {
             //let newCategory = Category(context: self.context)
             let newCategory = CategoryRealm()
             newCategory.name = textField.text!
+            newCategory.hexColor = UIColor.randomFlat().hexValue()
             
             //self.CategoryList.append(newCategory)
             
@@ -64,7 +71,10 @@ class CategoryTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categorycell", for: indexPath)
         
+        cell.backgroundColor = UIColor(hexString: (CategoryList?[indexPath.row].hexColor) ?? "1D9Bf6")
         cell.textLabel?.text = CategoryList?[indexPath.row].name ?? "Nothing"
+        cell.textLabel?.textColor = ContrastColorOf(cell.backgroundColor ?? UIColor.black, returnFlat: true)
+        
         return cell
     }
     
