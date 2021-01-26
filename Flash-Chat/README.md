@@ -1,6 +1,6 @@
 # iOS_ToyProject
 
-## Flash Chat
+# Flash Chat
 ![chat1](https://user-images.githubusercontent.com/70695311/105577818-34266400-5dbf-11eb-80c7-cb673d26638c.gif)
 
 *  CLTypingLabel을 이용해 동적인 메인화면 구현
@@ -41,7 +41,7 @@
  <img width="600" alt="스크린샷 2021-01-23 오후 8 57 07" src="https://user-images.githubusercontent.com/70695311/105578337-b49a9400-5dc2-11eb-93c1-7b01767aed6f.png">
  <img width="600" alt="스크린샷 2021-01-23 오후 8 57 18" src="https://user-images.githubusercontent.com/70695311/105578338-b7958480-5dc2-11eb-9c74-137beec28ddd.png">
 
-#### What I learned
+## What I learned
 - Third party libraries 
     - Cocoapods
     - Swift Package Manager
@@ -50,7 +50,7 @@
     - query, sort the database
 - .xib 파일을 이용한 커스텀뷰
 
-#### What I need to supplement
+## What I need to supplement
 - 채팅 내용이 적을 때 Textfield만 키보드에 따라 올라가고 TableView의 내용은 올라가면 안된다. 아직 이 부분을 수정하지 못했다. 
     - 다른 사람들의 키보드 컨트롤 하는 것을 찾아보았는데 보통 Notification을 사용한다. 아직 이 부분을 공부하지 못해 third party libraries를 유용하게 사용하는 것도 좋지만 스스로 더 좋은 뷰를 만들어야겠다.
 - Firebase를 이용하여 채팅앱을 만들었다. Firebase를 사용하면 가이드를 통해 비교적 복잡한 부분의 코드를 구현하기 쉽고 cocoapods로 Firebase의 필요한 내용들을 설치하면 되기 때문에 편리하다. 하지만 실제 개발을 할 때는 Firebase 없이 어떻게 서버에서 주는 데이터를 처리할지 고민해야겠다. 인터넷을 보니 소켓을 이용한 부분이 있던데 한번 공부해야겠다.
