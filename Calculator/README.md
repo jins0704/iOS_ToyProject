@@ -16,7 +16,7 @@
 - Struct vs Class
         - 불과 두달 전에 이 둘의 차이를 정리를 해봤지만 최근 여러 토이프로젝트에서 Model 생성 시 struct와 class의 특징을 고려하여 선언하지 않았다. 그저 struct로 선언하고 warning이 떴을 때 mutating 혹은 let -> var로 바꿔주며 오류 해결에 급급했다. 물론 지금까지 해온 프로젝트의 model들을 struct로 선언한 부분에 대해서는 문제가 없다는 것을 안다. 하지만 struct는 상속을 할 수 없다는 점, struct는 stack에 class는 heap에 저장된다는 점을 꼭 기억하며 분명하게 사용해야 할 것이다.   
         
-        <img width="300" alt="스크린샷 2021-01-29 오후 2 24 31" src="https://user-images.githubusercontent.com/70695311/106235267-bb4f5e00-623d-11eb-904d-7d5f002653fe.png">
+    <img width="600" alt="스크린샷 2021-01-29 오후 2 24 31" src="https://user-images.githubusercontent.com/70695311/106235267-bb4f5e00-623d-11eb-904d-7d5f002653fe.png">
 
     
 
