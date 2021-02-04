@@ -2,10 +2,7 @@
 
 # ToDoList
 ![todo1](https://user-images.githubusercontent.com/70695311/105811988-c1043400-5ff0-11eb-9fc3-0d91ab7162dd.gif)
-
-
 ![todo2](https://user-images.githubusercontent.com/70695311/105811991-c19cca80-5ff0-11eb-9bf7-20c298afe2df.gif)
-
 ![todo3](https://user-images.githubusercontent.com/70695311/105811993-c2cdf780-5ff0-11eb-8336-b68e986b8a6b.gif)
  
  <img width="600" alt="스크린샷 2021-01-26 오후 4 11 05" src="https://user-images.githubusercontent.com/70695311/105812258-2c4e0600-5ff1-11eb-91d1-8cfe62662777.png">
