@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,7 +26,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6en-gj-fo1" userLabel="ContentView">
-                                <rect key="frame" x="57" y="308" width="300" height="280"/>
+                                <rect key="frame" x="57" y="248" width="300" height="400"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="스크린샷 2021-02-06 오후 10.30.55.png" translatesAutoresizingMaskIntoConstraints="NO" id="sFD-ij-VDX">
                                         <rect key="frame" x="30" y="10" width="240" height="150"/>
@@ -35,31 +36,66 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="커스텀 팝업창입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cen-Fi-oNm">
-                                        <rect key="frame" x="79" y="180" width="142" height="21"/>
+                                        <rect key="frame" x="79.5" y="180" width="141.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQK-kW-eAi">
-                                        <rect key="frame" x="86" y="225" width="128" height="30"/>
-                                        <color key="backgroundColor" red="0.89247445961863725" green="0.29055845910704087" blue="0.3082891437812541" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                        <state key="normal" title="  유튜브로 이동하기!  ">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="moveButtonClicked:" destination="c6z-K2-82L" eventType="touchUpInside" id="hRw-yF-5Ax"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="rw2-eZ-wGO">
+                                        <rect key="frame" x="81" y="225.5" width="138" height="126"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQK-kW-eAi">
+                                                <rect key="frame" x="5" y="0.0" width="128" height="30"/>
+                                                <color key="backgroundColor" red="0.89247445961863725" green="0.29055845910704087" blue="0.3082891437812541" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <state key="normal" title="  유튜브로 이동하기!  ">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="moveButtonClicked:" destination="c6z-K2-82L" eventType="touchUpInside" id="hRw-yF-5Ax"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9S8-nl-q3X">
+                                                <rect key="frame" x="5" y="48" width="128" height="30"/>
+                                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <state key="normal" title=" 오픈채팅방 가기!   ">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="yellowButtonClicked:" destination="c6z-K2-82L" eventType="touchUpInside" id="xD9-fQ-9KY"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcR-Sh-VdS">
+                                                <rect key="frame" x="5" y="96" width="128" height="30"/>
+                                                <color key="backgroundColor" name="AccentColor"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <state key="normal" title="구글 검색해보기!">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="blueButtonClicked:" destination="c6z-K2-82L" eventType="touchUpInside" id="rP3-XC-1dF"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="9S8-nl-q3X" firstAttribute="leading" secondItem="rw2-eZ-wGO" secondAttribute="leading" constant="5" id="Axt-xZ-ojI"/>
+                                            <constraint firstAttribute="trailing" secondItem="9S8-nl-q3X" secondAttribute="trailing" constant="5" id="NVn-wg-Ad6"/>
+                                            <constraint firstAttribute="trailing" secondItem="oQK-kW-eAi" secondAttribute="trailing" constant="5" id="dX2-yB-ubi"/>
+                                            <constraint firstAttribute="trailing" secondItem="DcR-Sh-VdS" secondAttribute="trailing" constant="5" id="ojl-cu-55p"/>
+                                            <constraint firstItem="oQK-kW-eAi" firstAttribute="leading" secondItem="rw2-eZ-wGO" secondAttribute="leading" constant="5" id="wle-C4-flQ"/>
+                                            <constraint firstItem="DcR-Sh-VdS" firstAttribute="leading" secondItem="rw2-eZ-wGO" secondAttribute="leading" constant="5" id="yV0-wl-RKh"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="7Ok-W5-Nne"/>
+                                    <constraint firstAttribute="height" constant="400" id="7Ok-W5-Nne"/>
                                     <constraint firstItem="sFD-ij-VDX" firstAttribute="centerX" secondItem="6en-gj-fo1" secondAttribute="centerX" id="W2Q-2m-Xwr"/>
-                                    <constraint firstItem="oQK-kW-eAi" firstAttribute="centerX" secondItem="sFD-ij-VDX" secondAttribute="centerX" id="WRY-FZ-gFt"/>
+                                    <constraint firstItem="rw2-eZ-wGO" firstAttribute="top" secondItem="Cen-Fi-oNm" secondAttribute="bottom" constant="25" id="bSy-MK-XjW"/>
                                     <constraint firstItem="Cen-Fi-oNm" firstAttribute="centerX" secondItem="sFD-ij-VDX" secondAttribute="centerX" id="e6g-1d-yyt"/>
                                     <constraint firstItem="sFD-ij-VDX" firstAttribute="top" secondItem="6en-gj-fo1" secondAttribute="top" constant="10" id="eD9-vD-suK"/>
-                                    <constraint firstItem="oQK-kW-eAi" firstAttribute="top" secondItem="Cen-Fi-oNm" secondAttribute="bottom" constant="24" id="oJK-mS-VLs"/>
+                                    <constraint firstItem="rw2-eZ-wGO" firstAttribute="centerX" secondItem="6en-gj-fo1" secondAttribute="centerX" id="eTF-Q7-MLg"/>
                                     <constraint firstItem="Cen-Fi-oNm" firstAttribute="top" secondItem="sFD-ij-VDX" secondAttribute="bottom" constant="20" id="sC2-Vi-ksP"/>
                                     <constraint firstAttribute="width" constant="300" id="su9-ud-Zhl"/>
                                 </constraints>
@@ -89,8 +125,14 @@
     </scenes>
     <resources>
         <image name="스크린샷 2021-02-06 오후 10.30.55.png" width="292" height="250"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

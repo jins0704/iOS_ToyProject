@@ -7,8 +7,9 @@
 
 import UIKit
 
-class CustomPopUpViewController: UIViewController {
-
+class CustomPopUpViewController: UIViewController, PopUpDelegate {
+    
+    var popupDelegate : PopUpDelegate?
     @IBOutlet weak var backgroundButton: UIButton!
     @IBOutlet weak var moveButton: UIButton!
     @IBOutlet weak var ContentView: UIView!
@@ -16,11 +17,14 @@ class CustomPopUpViewController: UIViewController {
     var moveButtonCompletionClosure: (()-> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+       
         ContentView.layer.cornerRadius = 20
         moveButton.layer.cornerRadius = 10
+        
     }
     
+    // MARK: - IBAction
     @IBAction func moveButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
         
@@ -31,8 +35,25 @@ class CustomPopUpViewController: UIViewController {
         }
     }
     
+    @IBAction func yellowButtonClicked(_ sender: Any) {
+    }
+    
+    @IBAction func blueButtonClicked(_ sender: Any) {
+    }
+    
     @IBAction func backgroundButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: - Delegate
+    func yellowButtonClicked() {
+        self.dismiss(animated: true, completion: nil)
+        popupDelegate?.yellowButtonClicked()
+    }
+    
+    func blueButtonClicked() {
+        self.dismiss(animated: true, completion: nil)
+        popupDelegate?.blueButtonClicked()
     }
     
     /*

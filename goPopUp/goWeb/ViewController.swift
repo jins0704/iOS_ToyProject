@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, PopUpDelegate {
 
     @IBOutlet weak var myWebView: WKWebView!
     @IBOutlet weak var popupButton: UIButton!
@@ -33,7 +33,18 @@ class ViewController: UIViewController {
             self.myWebView.load(URLRequest(url: youtubeURL!))
         }
         
+        popUpVC.popupDelegate = self
         self.present(popUpVC, animated: true, completion: nil)
+    }
+    
+    func yellowButtonClicked() {
+        let youtubeURL = URL(string: "https://www.youtube.com/?gl=KR")
+        self.myWebView.load(URLRequest(url: youtubeURL!))
+    }
+    
+    func blueButtonClicked() {
+        let youtubeURL = URL(string: "https://www.youtube.com/?gl=KR")
+        self.myWebView.load(URLRequest(url: youtubeURL!))
     }
     
 }

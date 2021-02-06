@@ -17,6 +17,7 @@
 		4FEB955325CED19500895A5A /* 스크린샷 2021-02-06 오후 10.30.55.png in Resources */ = {isa = PBXBuildFile; fileRef = 4FEB955225CED19500895A5A /* 스크린샷 2021-02-06 오후 10.30.55.png */; };
 		4FEB955725CED44C00895A5A /* CustomPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEB955625CED44C00895A5A /* CustomPopUpViewController.swift */; };
 		4FEB955C25CED67800895A5A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEB955B25CED67800895A5A /* WebKit.framework */; };
+		4FEB956025CF007600895A5A /* PopUpDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEB955F25CF007600895A5A /* PopUpDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4FEB955225CED19500895A5A /* 스크린샷 2021-02-06 오후 10.30.55.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "스크린샷 2021-02-06 오후 10.30.55.png"; sourceTree = "<group>"; };
 		4FEB955625CED44C00895A5A /* CustomPopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopUpViewController.swift; sourceTree = "<group>"; };
 		4FEB955B25CED67800895A5A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		4FEB955F25CF007600895A5A /* PopUpDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				4FEB955225CED19500895A5A /* 스크린샷 2021-02-06 오후 10.30.55.png */,
 				4FEB954325CECF1E00895A5A /* Assets.xcassets */,
 				4FEB954525CECF1E00895A5A /* LaunchScreen.storyboard */,
+				4FEB955F25CF007600895A5A /* PopUpDelegate.swift */,
 			);
 			path = goWeb;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FEB956025CF007600895A5A /* PopUpDelegate.swift in Sources */,
 				4FEB955725CED44C00895A5A /* CustomPopUpViewController.swift in Sources */,
 				4FEB953F25CECF1B00895A5A /* ViewController.swift in Sources */,
 				4FEB953B25CECF1B00895A5A /* AppDelegate.swift in Sources */,
