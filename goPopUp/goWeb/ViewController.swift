@@ -35,10 +35,8 @@ class ViewController: UIViewController, PopUpDelegate {
     
     @IBAction func completeButtonClicked(_ sender: Any) {
         myWebView.isHidden = true
-        DispatchQueue.main.async {
-            self.navigationController?.navigationBar.isHidden = true
-            self.popupButton.isHidden = false
-        }
+        self.popupButton.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     // MARK: - Delegate
