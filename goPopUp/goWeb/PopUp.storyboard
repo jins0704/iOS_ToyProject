@@ -36,18 +36,18 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="커스텀 팝업창입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cen-Fi-oNm">
-                                        <rect key="frame" x="79.5" y="180" width="141.5" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="59" y="180" width="182" height="26.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="rw2-eZ-wGO">
-                                        <rect key="frame" x="81" y="225.5" width="138" height="126"/>
+                                        <rect key="frame" x="61" y="231.5" width="178" height="144"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQK-kW-eAi">
-                                                <rect key="frame" x="5" y="0.0" width="128" height="30"/>
+                                                <rect key="frame" x="5" y="0.0" width="168" height="36"/>
                                                 <color key="backgroundColor" red="0.89247445961863725" green="0.29055845910704087" blue="0.3082891437812541" alpha="0.65000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <state key="normal" title="  유튜브로 이동하기!  ">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -56,10 +56,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9S8-nl-q3X">
-                                                <rect key="frame" x="5" y="48" width="128" height="30"/>
+                                                <rect key="frame" x="5" y="54" width="168" height="36"/>
                                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                <state key="normal" title=" 오픈채팅방 가기!   ">
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <state key="normal" title=" 오픈채팅방 가기! ">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
@@ -67,9 +67,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DcR-Sh-VdS">
-                                                <rect key="frame" x="5" y="96" width="128" height="30"/>
+                                                <rect key="frame" x="5" y="108" width="168" height="36"/>
                                                 <color key="backgroundColor" name="AccentColor"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <state key="normal" title="구글 검색해보기!">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
@@ -102,7 +102,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DdZ-Ov-VdT"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.64906144953098421" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.70696357156143708" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Lno-rw-dFR" firstAttribute="leading" secondItem="DdZ-Ov-VdT" secondAttribute="leading" id="0bg-hd-Wrl"/>
                             <constraint firstItem="6en-gj-fo1" firstAttribute="centerY" secondItem="Wka-sn-ukx" secondAttribute="centerY" id="N6H-ia-Olm"/>
@@ -115,7 +115,9 @@
                     <connections>
                         <outlet property="ContentView" destination="6en-gj-fo1" id="WGI-09-qJm"/>
                         <outlet property="backgroundButton" destination="Lno-rw-dFR" id="CTD-9s-qL5"/>
+                        <outlet property="blueButton" destination="DcR-Sh-VdS" id="c2z-73-G1c"/>
                         <outlet property="moveButton" destination="oQK-kW-eAi" id="iIw-v1-ytb"/>
+                        <outlet property="yellowButton" destination="9S8-nl-q3X" id="6mw-xh-WjO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yem-JK-4EU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

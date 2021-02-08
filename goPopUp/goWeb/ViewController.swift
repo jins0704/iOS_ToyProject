@@ -15,6 +15,8 @@ class ViewController: UIViewController, PopUpDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.isHidden = true
         // Do any additional setup after loading the view.
     }
 
@@ -26,25 +28,42 @@ class ViewController: UIViewController, PopUpDelegate {
         //팝업 효과 스타일 설정
         popUpVC.modalPresentationStyle = .overCurrentContext //덮어 보여주는 스타일
         popUpVC.modalTransitionStyle = .crossDissolve //스르르 사라지는 스타일
-        
-        //컴플레션 블럭 호출 받으면
-        popUpVC.moveButtonCompletionClosure = {
-            let youtubeURL = URL(string: "https://www.youtube.com/?gl=KR")
-            self.myWebView.load(URLRequest(url: youtubeURL!))
-        }
-        
+                
         popUpVC.popupDelegate = self
         self.present(popUpVC, animated: true, completion: nil)
     }
     
+    @IBAction func completeButtonClicked(_ sender: Any) {
+        myWebView.isHidden = true
+        DispatchQueue.main.async {
+            self.navigationController?.navigationBar.isHidden = true
+            self.popupButton.isHidden = false
+        }
+    }
+    
+    // MARK: - Delegate
+    func moveButtonClicked() {
+        popupButton.isHidden = true
+        myWebView.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+        let currentURL = URL(string: "https://www.youtube.com/?gl=KR")
+        self.myWebView.load(URLRequest(url: currentURL!))
+    }
+    
     func yellowButtonClicked() {
-        let youtubeURL = URL(string: "https://www.youtube.com/?gl=KR")
-        self.myWebView.load(URLRequest(url: youtubeURL!))
+        popupButton.isHidden = true
+        myWebView.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+        let currentURL = URL(string: "https://open.kakao.com/o/gykKSRVc")
+        self.myWebView.load(URLRequest(url: currentURL!))
     }
     
     func blueButtonClicked() {
-        let youtubeURL = URL(string: "https://www.youtube.com/?gl=KR")
-        self.myWebView.load(URLRequest(url: youtubeURL!))
+        popupButton.isHidden = true
+        myWebView.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+        let currentURL = URL(string: "https://www.google.com/")
+        self.myWebView.load(URLRequest(url: currentURL!))
     }
     
 }

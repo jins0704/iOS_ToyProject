@@ -10,4 +10,5 @@ import Foundation
 protocol PopUpDelegate{
     func yellowButtonClicked()
     func blueButtonClicked()
+    func moveButtonClicked()
 }

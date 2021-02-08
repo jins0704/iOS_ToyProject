@@ -7,38 +7,40 @@
 
 import UIKit
 
-class CustomPopUpViewController: UIViewController, PopUpDelegate {
+class CustomPopUpViewController: UIViewController{
     
     var popupDelegate : PopUpDelegate?
     @IBOutlet weak var backgroundButton: UIButton!
     @IBOutlet weak var moveButton: UIButton!
+    @IBOutlet weak var yellowButton: UIButton!
+    @IBOutlet weak var blueButton: UIButton!
     @IBOutlet weak var ContentView: UIView!
    
-    var moveButtonCompletionClosure: (()-> Void)?
     override func viewDidLoad() {
         super.viewDidLoad()
         
        
         ContentView.layer.cornerRadius = 20
         moveButton.layer.cornerRadius = 10
+        yellowButton.layer.cornerRadius = 10
+        blueButton.layer.cornerRadius = 10
         
     }
     
     // MARK: - IBAction
     @IBAction func moveButtonClicked(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
-        
-        //컴플레션 블럭 호출
-        if let moveButtonCompletionClosure = moveButtonCompletionClosure{
-            //메인에 알린다
-            moveButtonCompletionClosure()
-        }
+        popupDelegate?.moveButtonClicked()
     }
     
     @IBAction func yellowButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        popupDelegate?.yellowButtonClicked()
     }
     
     @IBAction func blueButtonClicked(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        popupDelegate?.blueButtonClicked()
     }
     
     @IBAction func backgroundButtonClicked(_ sender: Any) {
@@ -46,15 +48,7 @@ class CustomPopUpViewController: UIViewController, PopUpDelegate {
     }
     
     // MARK: - Delegate
-    func yellowButtonClicked() {
-        self.dismiss(animated: true, completion: nil)
-        popupDelegate?.yellowButtonClicked()
-    }
-    
-    func blueButtonClicked() {
-        self.dismiss(animated: true, completion: nil)
-        popupDelegate?.blueButtonClicked()
-    }
+   
     
     /*
     // MARK: - Navigation
