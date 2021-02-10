@@ -33,9 +33,56 @@ class HomeVC: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate
         //제스처 추가
         self.keyboardDismissTapGesture.delegate = self
         self.view.addGestureRecognizer(keyboardDismissTapGesture)
-        
-        //self.searchBar.becomeFirstResponder()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.searchBar.becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Notification 생성 - Keyboard
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShowHandle(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHideHandle), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Notification 삭제 - keyboard
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardShowHandle(notification : NSNotification){
+        
+        
+        //키보드 사이즈 가져오기
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue{
+            
+//            print(keyboardSize.height)
+//            print(searchButton.frame.origin.y)
+//            print(searchButton.frame.height)
+
+            // 키보드에 따라 뷰 올리기
+            if keyboardSize.height < searchButton.frame.origin.y{
+                let distance = searchButton.frame.origin.y - keyboardSize.height
+                
+                self.view.frame.origin.y = -distance
+            }
+        }
+    }
+    
+    @objc func keyboardHideHandle(){
+        //뷰 원상태로 되돌리기
+        self.view.frame.origin.y = 0
+    }
+    
     func pushVC(){
         var searchID = ""
         
