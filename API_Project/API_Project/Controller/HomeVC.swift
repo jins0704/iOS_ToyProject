@@ -7,8 +7,9 @@
 
 import UIKit
 import Toast_Swift
+import Alamofire
 
-class HomeVC: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate{
+class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
 
     @IBOutlet weak var searchFilterSegment: UISegmentedControl!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -136,6 +137,38 @@ class HomeVC: UIViewController, UISearchBarDelegate, UIGestureRecognizerDelegate
     
     @IBAction func searchButtonClicked(_ sender: UIButton) {
         //서치버튼 클릭
+        
+//        let url = API.BASE_URL + "search/photos"
+//        let queryParam = ["query" : userInput, "client_id" : API.CLIENT_ID]
+//
+//        AF.request(url, method: .get, parameters: queryParam).validate(statusCode: 200..<300).responseJSON { (response) in
+//            debugPrint(response)
+//        }
+        
+        guard let userInput = self.searchBar.text else{return}
+        
+        var urlToCall : URLRequestConvertible?
+        
+        switch searchFilterSegment.selectedSegmentIndex {
+        case 0:
+            urlToCall = SearchRouter.SearchPhotos(terms: userInput)
+        case 1 :
+            urlToCall = SearchRouter.SearchUsers(terms: userInput)
+        default:
+            print("default")
+        }
+        
+        if let urlConvertible = urlToCall{
+            AlamofireManager
+                .shared
+                .session
+                .request(urlConvertible)
+                .validate(statusCode: 200..<401)
+                .responseJSON { (response) in
+                    debugPrint(response)
+                }
+        }
+    
         pushVC()
         searchBar.resignFirstResponder()
     }
