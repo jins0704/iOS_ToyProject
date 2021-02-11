@@ -23,7 +23,6 @@ class BaseInterceptor: RequestInterceptor {
         dictionary.updateValue(API.CLIENT_ID, forKey: "client_id")
         
         do{
-            print("client_id 추가")
             request = try URLEncodedFormParameterEncoder().encode(dictionary, into: request)
         }catch{
             print(error)

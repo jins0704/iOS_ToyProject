@@ -147,27 +147,37 @@ class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
         
         guard let userInput = self.searchBar.text else{return}
         
-        var urlToCall : URLRequestConvertible?
+        //var urlToCall : URLRequestConvertible?
         
         switch searchFilterSegment.selectedSegmentIndex {
         case 0:
-            urlToCall = SearchRouter.SearchPhotos(terms: userInput)
+            //urlToCall = SearchRouter.SearchPhotos(terms: userInput)
+            AlamofireManager.shared.getPhotos(searchTerm: userInput, completion: { result in
+
+                switch result{
+                case .success(let fetchedPhotos):
+                    print(fetchedPhotos.count)
+                case .failure(let error):
+                    print(error.rawValue)
+                }
+            })
         case 1 :
-            urlToCall = SearchRouter.SearchUsers(terms: userInput)
+            //urlToCall = SearchRouter.SearchUsers(terms: userInput)
+            print("users")
         default:
             print("default")
         }
         
-        if let urlConvertible = urlToCall{
-            AlamofireManager
-                .shared
-                .session
-                .request(urlConvertible)
-                .validate(statusCode: 200..<401)
-                .responseJSON { (response) in
-                    debugPrint(response)
-                }
-        }
+//        if let urlConvertible = urlToCall{
+//            AlamofireManager
+//                .shared
+//                .session
+//                .request(urlConvertible)
+//                .validate(statusCode: 200..<401)
+//                .responseJSON { (response) in
+//                    debugPrint(response)
+//                }
+//        }
     
         pushVC()
         searchBar.resignFirstResponder()
