@@ -99,18 +99,23 @@ class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
         self.performSegue(withIdentifier: searchID, sender: nil)
     }
     
+    //MARK: - Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        
         switch segue.identifier {
         case SEGUE_ID.USER_LIST_VC:
             let nextVC = segue.destination as! UserListVC
             guard let userInput = self.searchBar.text else{return}
             nextVC.vcTitle = "USER : " + userInput
+            nextVC.userInput = userInput
         
         case SEGUE_ID.PHOTO_COLLECTION_VC:
             let nextVC = segue.destination as! PhotoCollectionVC
             guard let userInput = self.searchBar.text else{return}
             nextVC.vcTitle = "PHOTO : " + userInput
-        
+            nextVC.userInput = userInput
+            
         default:
             print("default")
         }
@@ -144,29 +149,8 @@ class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
 //        AF.request(url, method: .get, parameters: queryParam).validate(statusCode: 200..<300).responseJSON { (response) in
 //            debugPrint(response)
 //        }
-        
-        guard let userInput = self.searchBar.text else{return}
-        
-        //var urlToCall : URLRequestConvertible?
-        
-        switch searchFilterSegment.selectedSegmentIndex {
-        case 0:
-            //urlToCall = SearchRouter.SearchPhotos(terms: userInput)
-            AlamofireManager.shared.getPhotos(searchTerm: userInput, completion: { result in
-
-                switch result{
-                case .success(let fetchedPhotos):
-                    print(fetchedPhotos.count)
-                case .failure(let error):
-                    print(error.rawValue)
-                }
-            })
-        case 1 :
-            //urlToCall = SearchRouter.SearchUsers(terms: userInput)
-            print("users")
-        default:
-            print("default")
-        }
+    
+//var urlToCall : URLRequestConvertible?
         
 //        if let urlConvertible = urlToCall{
 //            AlamofireManager
@@ -178,23 +162,22 @@ class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
 //                    debugPrint(response)
 //                }
 //        }
-    
-        pushVC()
+        
+        self.pushVC()
         searchBar.resignFirstResponder()
     }
     
     //MARK: - SearchBar Methods
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-
+ 
         guard let userInput = searchBar.text else{return}
         
         if userInput.isEmpty{
             self.view.makeToast("검색어를 입력해주세요", duration: 3.0, position: .center)
         }
         else{
-            //서치 클릭
-            pushVC()
+            self.pushVC()
             searchBar.resignFirstResponder()
         }
     }
@@ -203,8 +186,7 @@ class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
             self.searchButton.isHidden = true
             
             DispatchQueue.main.asyncAfter(deadline: .now()+0.01, execute: {
-                //포커싱 해제
-                self.searchBar.resignFirstResponder()
+    
             })
         }
         else{

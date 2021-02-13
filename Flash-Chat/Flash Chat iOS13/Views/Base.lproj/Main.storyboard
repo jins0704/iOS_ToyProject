@@ -374,9 +374,6 @@
             <point key="canvasLocation" x="-86.956521739130437" y="134.59821428571428"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="y7D-jv-BlJ"/>
-    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="hdA-Yq-fZ5"/>
     </inferredMetricsTieBreakers>

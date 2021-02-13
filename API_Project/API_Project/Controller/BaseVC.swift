@@ -15,6 +15,7 @@ class BaseVC: UIViewController {
             self.title = vcTitle
         }
     }
+    var userInput : String?
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
