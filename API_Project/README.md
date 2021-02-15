@@ -10,7 +10,7 @@
 ### 사용한 API
     - unsplash
 
-![apialamo](https://user-images.githubusercontent.com/70695311/107909781-536a7880-6f9c-11eb-9e14-956ef5c2457e.gif)
+   ![apialamo](https://user-images.githubusercontent.com/70695311/107909781-536a7880-6f9c-11eb-9e14-956ef5c2457e.gif)
 
 1.  API 처리하기
 
@@ -59,7 +59,7 @@
     
     -  즉 singleton으로 된 AlamofireManager가 있다. 이것의 세션은 내가 적용하는 인터셉터와 이벤트 모니터들로 구성된다. 인터셉터는 서버에 요청을 보낼 때, 중간에 가로채서 어떤 작업을 한 뒤 다시 서버로 보내는 역할이다. func adapt에는 client_id를 넣고 서버로 보낼 수 있게 하였고 func retry 부분으로 실패시 다시 어떤 수행을 할지 적용했다. 이벤트 모니터는 request에 따른 로그를 받도록 했다. URLRequestConvertible는 SearchRouter로 네트워크 스택 구축 시 공통 패턴을 채택할 수 있도록 하여 enum 형태로 원하는 함수로 입력값에 따라 적합한 데이터 request를 할 수 있도록 했다. 
 
-![apinoti](https://user-images.githubusercontent.com/70695311/107909768-4f3e5b00-6f9c-11eb-9029-52363d1a71b3.gif)
+    ![apinoti](https://user-images.githubusercontent.com/70695311/107909768-4f3e5b00-6f9c-11eb-9029-52363d1a71b3.gif)
 
 
 2. NotificationCenter - Keyboard
@@ -73,7 +73,8 @@
 - 여기서 키보드 이벤트를 처리해야하는 이유는 키보드가 올라올 때 화면을 가리는 경우 때문이다. 이런 경우 키보드와 가장 하단에 있는 UIView의 사이즈를 받아 가리면 뷰의 프레임 y를 값을 수정해주고 키보드가 내려갈 때 원상태로 되돌리도록 한다. 
 
 - 이 밖에 gestureRecognizer를 추가하여 어떤 UIView를 터치했냐에 따라 becomeFirstResponder() , resignFirstResponder() 처럼 포커싱을 주거나 해제를 하여 키보드를 자동적으로 반응하도록 한다. 이것에 따라 NotificationCenter에서 이벤트를 전달받아 특정 func를 수행 할 수 있다. 
-![apitoggle](https://user-images.githubusercontent.com/70695311/107909786-55343c00-6f9c-11eb-843c-40d368658a89.gif)
+
+    ![apitoggle](https://user-images.githubusercontent.com/70695311/107909786-55343c00-6f9c-11eb-843c-40d368658a89.gif)
 
 3. Custom Toggle
     
