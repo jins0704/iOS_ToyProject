@@ -149,9 +149,9 @@ class HomeVC: BaseVC, UISearchBarDelegate, UIGestureRecognizerDelegate{
 //        AF.request(url, method: .get, parameters: queryParam).validate(statusCode: 200..<300).responseJSON { (response) in
 //            debugPrint(response)
 //        }
-    
+//    
 //var urlToCall : URLRequestConvertible?
-        
+//        
 //        if let urlConvertible = urlToCall{
 //            AlamofireManager
 //                .shared

@@ -40,6 +40,7 @@ enum SearchRouter: URLRequestConvertible {
     func asURLRequest() throws -> URLRequest {
         let url = baseURL.appendingPathComponent(path)
         var request = URLRequest(url: url)
+        
         request.method = method
         
         request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
