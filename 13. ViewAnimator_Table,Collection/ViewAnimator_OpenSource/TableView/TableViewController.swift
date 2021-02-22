@@ -8,7 +8,7 @@
 import UIKit
 import ViewAnimator
 
-class TableViewController: CommonViewController, UITableViewDelegate, UITableViewDataSource{
+class TableViewController: CommonViewController, UITableViewDelegate, UITableViewDataSource, CellDelegate{
 
     @IBOutlet weak var TableView: UITableView!
     
@@ -16,7 +16,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        TableView.delegate = self
+
         TableView.dataSource = self
         TableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "tablecell")
         TableView.rowHeight = 50
@@ -58,6 +58,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
             TableView.superview?.layoutIfNeeded()
         }
     }
+    
     @objc func handleRefresh(sender : AnyObject){
         
         self.newArr.removeAll()
@@ -71,6 +72,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
     
             //UI 갱신
             self.TableView.reloadData()
+            
             //애니메이션 적용
             UIView.animate(views: self.TableView.visibleCells,
                            animations: self.animations,
@@ -84,6 +86,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
     // MARK: - IBAction
     
     @IBAction func EditButtonClicked(_ sender: UIBarButtonItem) {
+      
         if self.TableView.isEditing{
             sender.title = "Edit"
             self.TableView.setEditing(false, animated: true)
@@ -92,6 +95,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
             sender.title = "Done"
             self.TableView.setEditing(true, animated: true)
         }
+        
     }
     
     // MARK: - tableView DataSource
@@ -102,13 +106,25 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
-        let cell : TableViewCell = TableView.dequeueReusableCell(withIdentifier: "tablecell", for: indexPath) as! TableViewCell
+        let cell : TableViewCell =
+            TableView.dequeueReusableCell(withIdentifier: "tablecell", for: indexPath) as! TableViewCell
         
+        cell.delegate = self
+        cell.index = indexPath.row
+                    
         if(newArr.count > 0){
-            cell.label.text = self.newArr[indexPath.row]
+            cell.label.text = self.newArr[indexPath.row].num
+            cell.isHeart = self.newArr[indexPath.row].like
         }
         
         return cell
+    }
+    
+    func clickHeart(for index: Int, like: Bool) {
+        
+        newArr[index].like = like
+        arr[index].like = like
+        
     }
     
     // MARK: - tableView Delegate
@@ -167,6 +183,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         CGFloat.init(30)
     }
+    
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 //        if editingStyle == .delete{
 //            self.newArr.remove(at: indexPath.row)
