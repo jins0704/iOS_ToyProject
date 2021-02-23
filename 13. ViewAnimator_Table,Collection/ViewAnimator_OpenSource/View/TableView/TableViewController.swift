@@ -6,13 +6,10 @@
 //
 
 import UIKit
-import ViewAnimator
 
 class TableViewController: CommonViewController, UITableViewDelegate, UITableViewDataSource, CellDelegate{
 
     @IBOutlet weak var TableView: UITableView!
-    
-    let animations = [AnimationType.vector(CGVector(dx: 0, dy: 30))]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +20,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
         
         //헤더 설정
         TableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: "headerView")
-        
-        //데이터 변경
-        newArr = arr
-        
+ 
         //갱신
         self.TableView.reloadData()
         
@@ -38,18 +32,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
        
         }
         
-        //테이블 뷰에 리프레시 컨트롤 달기
-        let refreshControl = UIRefreshControl()
-        refreshControl.tintColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
-        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
-        
-        let boldfont = UIFont.boldSystemFont(ofSize: 20)
-        let attributes : [NSAttributedString.Key : Any] = [
-            .font : boldfont,
-            .foregroundColor : UIColor.init(cgColor: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
-        ]
-        refreshControl.attributedTitle = NSAttributedString(string : "기다려요~", attributes: attributes)
-        
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)        
         self.TableView.refreshControl = refreshControl
     }
     
@@ -79,7 +62,7 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
                            reversed: false,
                            initialAlpha: 0.0, //안보이다
                            finalAlpha: 1.0, //보이게
-                           //options: 추가 가능
+                           options: [.curveLinear],
                            completion: nil)
         }
     }
@@ -122,39 +105,34 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
     
     func clickHeart(for index: Int, like: Bool) {
         
-        newArr[index].like = like
-        arr[index].like = like
-        
+        //newArr[index].like = like  reload 할때도 남아있게 하고싶다면!
     }
     
     // MARK: - tableView Delegate
     
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
-            self.newArr.remove(at: indexPath.row)
-            self.arr.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-
-            completion(true)
-        }
-
-        deleteAction.backgroundColor = .red
-
-        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-
-        configuration.performsFirstActionWithFullSwipe = false
-
-        return configuration
-    }
+//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//
+//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
+//            self.arr.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//
+//            completion(true)
+//        }
+//
+//        deleteAction.backgroundColor = .red
+//
+//        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+//
+//        configuration.performsFirstActionWithFullSwipe = false
+//
+//        return configuration
+//    }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let movedObject = self.arr[sourceIndexPath.row]
-           arr.remove(at: sourceIndexPath.row)
-           arr.insert(movedObject, at: destinationIndexPath.row)
-        //테이블뷰에서는 옮겨짐
-        //셀로 이용하는 newArr의 배열은 안바뀜
-        //newArr배열의 소스 배열인 arr배열은 바뀜
+           newArr.remove(at: sourceIndexPath.row)
+           newArr.insert(movedObject, at: destinationIndexPath.row)
+ 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -184,10 +162,9 @@ class TableViewController: CommonViewController, UITableViewDelegate, UITableVie
         CGFloat.init(30)
     }
     
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete{
-//            self.newArr.remove(at: indexPath.row)
-//            self.arr.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade) }
-//    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            self.newArr.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade) }
+    }
 }

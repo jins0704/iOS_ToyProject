@@ -6,12 +6,16 @@
 //
 
 import UIKit
+import ViewAnimator
 
 class CommonViewController: UIViewController {
 
     
     var arr : [cellNum] = []
     var newArr : [cellNum] = []
+    
+    let animations = [AnimationType.vector(CGVector(dx: 0, dy: 30))]
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +41,19 @@ class CommonViewController: UIViewController {
         arr.append(cellNum(num: "19", like: false))
         arr.append(cellNum(num: "29", like: false))
 
-        // Do any additional setup after loading the view.
+        //데이터 변경
+        newArr = arr
+
+        //테이블 뷰에 리프레시 컨트롤 달기
+        refreshControl.tintColor = #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1)
+        
+        let boldfont = UIFont.boldSystemFont(ofSize: 20)
+        let attributes : [NSAttributedString.Key : Any] = [
+            .font : boldfont,
+            .foregroundColor : UIColor.init(cgColor: #colorLiteral(red: 0.8078431487, green: 0.02745098062, blue: 0.3333333433, alpha: 1))
+        ]
+        refreshControl.attributedTitle = NSAttributedString(string : "기다려요~", attributes: attributes)
+        
     }
     
 }

@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="CollectionViewCell" customModule="ViewAnimator_OpenSource" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CollectionViewCell" id="gTV-IL-0wX" customClass="CollectionViewCell" customModule="ViewAnimator_OpenSource" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="195" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -22,18 +22,29 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g1H-Bx-LEa">
+                        <rect key="frame" x="87" y="140.5" width="21" height="39.5"/>
+                        <state key="normal" image="heart" catalog="system"/>
+                    </button>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="g1H-Bx-LEa" secondAttribute="bottom" constant="20" id="0YA-cd-ctG"/>
                 <constraint firstItem="9fR-Xy-ax1" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Ax2-4o-UAb"/>
+                <constraint firstItem="g1H-Bx-LEa" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="frE-OS-GLq"/>
+                <constraint firstItem="g1H-Bx-LEa" firstAttribute="top" secondItem="9fR-Xy-ax1" secondAttribute="bottom" constant="30" id="myf-5Z-eGU"/>
                 <constraint firstItem="9fR-Xy-ax1" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="y8l-ld-Vxi"/>
             </constraints>
             <size key="customSize" width="195" height="200"/>
             <connections>
+                <outlet property="heartBtn" destination="g1H-Bx-LEa" id="meB-6q-F6f"/>
                 <outlet property="label" destination="9fR-Xy-ax1" id="Nc3-Dt-2kO"/>
             </connections>
             <point key="canvasLocation" x="194.92753623188406" y="93.75"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
 </document>
