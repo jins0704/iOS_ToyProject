@@ -15,7 +15,7 @@ class CollectionViewCell: UICollectionViewCell {
     var isHeart : Bool = false{
         willSet(newValue){
             if isHeart != newValue{
-                animated(btn: heartBtn)
+                //animated(btn: heartBtn)
             }
         }
     }

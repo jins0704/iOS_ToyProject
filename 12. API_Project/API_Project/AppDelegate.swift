@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AlamofireNetworkActivityIndicator
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Lauch Screen Delay
         Thread.sleep(forTimeInterval: 0.5)
+        
+        NetworkActivityIndicatorManager.shared.isEnabled = true
+        NetworkActivityIndicatorManager.shared.startDelay = 1.0
+        NetworkActivityIndicatorManager.shared.completionDelay = 2
+
         
         return true
     }

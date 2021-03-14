@@ -42,11 +42,22 @@
                                     <constraint firstAttribute="height" constant="200" id="u6j-SN-ppM"/>
                                 </constraints>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S73-Xr-GoF">
+                                <rect key="frame" x="100" y="648" width="214" height="164"/>
+                                <state key="normal" title="Page"/>
+                                <connections>
+                                    <segue destination="ukG-5b-Xnh" kind="show" id="OzG-Op-krl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="S73-Xr-GoF" firstAttribute="top" secondItem="ufr-Ll-k1A" secondAttribute="bottom" constant="100" id="3W4-je-vur"/>
+                            <constraint firstItem="S73-Xr-GoF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="BvV-VO-k6l"/>
                             <constraint firstItem="ufr-Ll-k1A" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vro-MR-1za"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="S73-Xr-GoF" secondAttribute="bottom" constant="50" id="ca2-za-dkH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="S73-Xr-GoF" secondAttribute="trailing" constant="100" id="sPP-GB-o6p"/>
                             <constraint firstItem="ufr-Ll-k1A" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="svS-jE-av0"/>
                         </constraints>
                     </view>
@@ -92,6 +103,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sRz-bA-6kc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2030.4347826086957" y="-281.25"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ZQl-a4-96R">
+            <objects>
+                <viewController id="ukG-5b-Xnh" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eu1-41-pm5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="WKa-K0-T9v"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dY4-db-RKR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eIs-bV-KgH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="242" y="838"/>
         </scene>
         <!--Collection View Controller-->
         <scene sceneID="xmr-23-M8l">

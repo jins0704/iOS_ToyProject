@@ -23,7 +23,7 @@ struct Heart{
         UIView.animate(withDuration: 0.1) {
             //작아지는 애니메이션
             btn.transform = btn.transform.scaledBy(x: 0.5, y: 0.5)
-            btn.setImage(Heart.isHeart ? Heart.normalImage : Heart.activatedmage, for: .normal)
+            //btn.setImage(Heart.isHeart ? Heart.normalImage : Heart.activatedmage, for: .normal)
 
         } completion: { _ in
 

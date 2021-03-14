@@ -9,4 +9,5 @@ target 'API_Project' do
   pod 'Alamofire', '~> 5.2' 
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'AlamofireNetworkActivityIndicator', '~> 3.1'
 end

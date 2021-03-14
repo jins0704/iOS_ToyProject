@@ -26,7 +26,7 @@ class TableViewCell: UITableViewCell {
     var isHeart : Bool = false{
         willSet(newValue){
             if isHeart != newValue{
-                Heart.animated(btn: heartBtn)
+                //Heart.animated(btn: heartBtn)
             }
         }
     }
