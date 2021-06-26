@@ -101,22 +101,27 @@
             </objects>
             <point key="canvasLocation" x="2030.4347826086957" y="-281.25"/>
         </scene>
-        <!--Page View Controller-->
+        <!--Page Control-->
         <scene sceneID="OGe-Xr-XP5">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="60d-6W-FGf" sceneMemberID="viewController">
+                <pageViewController storyboardIdentifier="pageControl" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="60d-6W-FGf" customClass="pageControl" customModule="ViewAnimator_OpenSource" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="h3m-h6-HKd"/>
+                    <connections>
+                        <segue destination="Vtk-bd-gig" kind="show" id="uBe-R6-zVR"/>
+                        <segue destination="o8v-hc-s8Y" kind="show" id="TfG-vz-5Eh"/>
+                        <segue destination="8U6-p9-GDC" kind="show" id="IQA-dU-b1L"/>
+                    </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u1k-BL-K7T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="1848"/>
+            <point key="canvasLocation" x="951" y="1858"/>
         </scene>
         <!--PageVC1-->
         <scene sceneID="6rC-Px-KIw">
             <objects>
                 <viewController storyboardIdentifier="pageVC1" id="Vtk-bd-gig" customClass="pageVC1" customModule="ViewAnimator_OpenSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iPG-OV-gJz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="394" height="630"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="leh-8F-fuj"/>
                         <color key="backgroundColor" systemColor="systemRedColor"/>
@@ -176,7 +181,7 @@
                                     <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CD1-Mg-8YT">
                                         <rect key="frame" x="10" y="20" width="394" height="684"/>
                                         <connections>
-                                            <segue destination="60d-6W-FGf" kind="embed" identifier="pageSegue" id="udp-zP-bSp"/>
+                                            <segue destination="60d-6W-FGf" kind="embed" id="gpI-lh-hWz"/>
                                         </connections>
                                     </containerView>
                                 </subviews>
@@ -279,6 +284,7 @@
                     <view key="view" contentMode="scaleToFill" id="TE7-kl-3Ga">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="GfV-kc-ROb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                 </viewController>
@@ -291,7 +297,7 @@
             <objects>
                 <viewController storyboardIdentifier="pageVC2" id="o8v-hc-s8Y" customClass="pageVC2" customModule="ViewAnimator_OpenSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MOg-do-dUN">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="394" height="630"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="pvs-dn-XHj"/>
                         <color key="backgroundColor" systemColor="linkColor"/>
@@ -307,7 +313,7 @@
             <objects>
                 <viewController storyboardIdentifier="pageVC3" id="8U6-p9-GDC" customClass="pageVC3" customModule="ViewAnimator_OpenSource" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CgZ-2r-yL0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="394" height="630"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="sGv-Bw-SIw"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>

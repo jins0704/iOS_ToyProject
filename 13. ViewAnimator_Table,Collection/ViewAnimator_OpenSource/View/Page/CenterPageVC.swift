@@ -10,14 +10,25 @@ import UIKit
 class CenterPageVC: UIPageViewController {
 
     var pageController : pageControl!
-    
+    var currentIndex : Int = 0 {
+         didSet{
+             print(currentIndex)
+         }
+     }
+     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pageSegue"{
-            if segue.destination.isKind(of: pageControl.self){
-                pageController = segue.destination as? pageControl
+            print("connected")
+            guard let vc = segue.destination as? pageControl else{
+                print("no dest")
+                return}
+            pageController = vc
+            pageController.completeHandler = { (result) in
+                self.currentIndex = result
             }
         }
     }
+    
     @IBAction func redBtnClicked(_ sender: Any) {
         pageController.setViewControllerFromIndex(index: 0)
     }
