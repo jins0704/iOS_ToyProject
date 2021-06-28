@@ -21,10 +21,10 @@
 		4F8E173925DA76250008208C /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8E173725DA76250008208C /* CollectionViewCell.swift */; };
 		4F8E173A25DA76250008208C /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F8E173825DA76250008208C /* CollectionViewCell.xib */; };
 		4FE8A5AD2685B7BA0094D85E /* pageVC1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5AC2685B7BA0094D85E /* pageVC1.swift */; };
-		4FE8A5AF2685B7C50094D85E /* pageVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5AE2685B7C50094D85E /* pageVC2.swift */; };
-		4FE8A5B12685B7D20094D85E /* pageVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5B02685B7D20094D85E /* pageVC3.swift */; };
 		4FE8A5B32685B83F0094D85E /* pageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5B22685B83F0094D85E /* pageControl.swift */; };
 		4FE8A5B52685BB360094D85E /* CenterPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5B42685BB360094D85E /* CenterPageVC.swift */; };
+		4FE8A5DB2689CD720094D85E /* pageVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5DA2689CD720094D85E /* pageVC2.swift */; };
+		4FE8A5DD2689CD7E0094D85E /* pageVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE8A5DC2689CD7E0094D85E /* pageVC3.swift */; };
 		4FF6C91625DBCEB600F5B219 /* cellNum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6C91525DBCEB600F5B219 /* cellNum.swift */; };
 		4FF918A625E5361C0096FC26 /* Heart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF918A525E5361C0096FC26 /* Heart.swift */; };
 		C855FC62D88726D8FCF5EAF8 /* Pods_ViewAnimator_OpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1548B314497D674FE164728F /* Pods_ViewAnimator_OpenSource.framework */; };
@@ -48,10 +48,10 @@
 		4F8E173725DA76250008208C /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		4F8E173825DA76250008208C /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		4FE8A5AC2685B7BA0094D85E /* pageVC1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageVC1.swift; sourceTree = "<group>"; };
-		4FE8A5AE2685B7C50094D85E /* pageVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageVC2.swift; sourceTree = "<group>"; };
-		4FE8A5B02685B7D20094D85E /* pageVC3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageVC3.swift; sourceTree = "<group>"; };
 		4FE8A5B22685B83F0094D85E /* pageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageControl.swift; sourceTree = "<group>"; };
 		4FE8A5B42685BB360094D85E /* CenterPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPageVC.swift; sourceTree = "<group>"; };
+		4FE8A5DA2689CD720094D85E /* pageVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageVC2.swift; sourceTree = "<group>"; };
+		4FE8A5DC2689CD7E0094D85E /* pageVC3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pageVC3.swift; sourceTree = "<group>"; };
 		4FF6C91525DBCEB600F5B219 /* cellNum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = cellNum.swift; sourceTree = "<group>"; };
 		4FF918A525E5361C0096FC26 /* Heart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Heart.swift; sourceTree = "<group>"; };
 		54E938CF303BCFEF28A349E3 /* Pods-ViewAnimator_OpenSource.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ViewAnimator_OpenSource.debug.xcconfig"; path = "Target Support Files/Pods-ViewAnimator_OpenSource/Pods-ViewAnimator_OpenSource.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,11 +136,11 @@
 		4FD832B025FCCC2300D8A214 /* Page */ = {
 			isa = PBXGroup;
 			children = (
-				4FE8A5AC2685B7BA0094D85E /* pageVC1.swift */,
-				4FE8A5AE2685B7C50094D85E /* pageVC2.swift */,
-				4FE8A5B02685B7D20094D85E /* pageVC3.swift */,
 				4FE8A5B22685B83F0094D85E /* pageControl.swift */,
 				4FE8A5B42685BB360094D85E /* CenterPageVC.swift */,
+				4FE8A5AC2685B7BA0094D85E /* pageVC1.swift */,
+				4FE8A5DA2689CD720094D85E /* pageVC2.swift */,
+				4FE8A5DC2689CD7E0094D85E /* pageVC3.swift */,
 			);
 			path = Page;
 			sourceTree = "<group>";
@@ -291,11 +291,11 @@
 			files = (
 				4FE8A5B32685B83F0094D85E /* pageControl.swift in Sources */,
 				4F8E172325DA64660008208C /* TableViewCell.swift in Sources */,
-				4FE8A5B12685B7D20094D85E /* pageVC3.swift in Sources */,
+				4FE8A5DD2689CD7E0094D85E /* pageVC3.swift in Sources */,
 				4F8E170925DA60820008208C /* ViewController.swift in Sources */,
 				4FE8A5B52685BB360094D85E /* CenterPageVC.swift in Sources */,
+				4FE8A5DB2689CD720094D85E /* pageVC2.swift in Sources */,
 				4FF918A625E5361C0096FC26 /* Heart.swift in Sources */,
-				4FE8A5AF2685B7C50094D85E /* pageVC2.swift in Sources */,
 				4F8E173925DA76250008208C /* CollectionViewCell.swift in Sources */,
 				4FF6C91625DBCEB600F5B219 /* cellNum.swift in Sources */,
 				4F8E170525DA60820008208C /* AppDelegate.swift in Sources */,

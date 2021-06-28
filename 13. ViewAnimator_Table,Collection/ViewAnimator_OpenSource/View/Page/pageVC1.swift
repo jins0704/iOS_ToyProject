@@ -11,8 +11,16 @@ class pageVC1: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("pageVC1 ... viewDidLoad")
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("pageVC1 ... videDidAppear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("pageVC1 ... videDidDisappear")
     }
     
 

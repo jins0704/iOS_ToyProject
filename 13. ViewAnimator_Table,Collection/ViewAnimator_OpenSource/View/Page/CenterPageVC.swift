@@ -7,14 +7,14 @@
 
 import UIKit
 
-class CenterPageVC: UIPageViewController {
+class CenterPageVC: UIViewController {
 
-    var pageController : pageControl!
-    var currentIndex : Int = 0 {
-         didSet{
-             print(currentIndex)
-         }
-     }
+    var pageController : pageControl?
+//    var currentIndex : Int = 0 {
+//         didSet{
+//             print(currentIndex)
+//         }
+//     }
      
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pageSegue"{
@@ -23,20 +23,21 @@ class CenterPageVC: UIPageViewController {
                 print("no dest")
                 return}
             pageController = vc
-            pageController.completeHandler = { (result) in
-                self.currentIndex = result
-            }
+//          pageController?.completeHandler = { (result) in
+//                print(result)
+//                self.currentIndex = result
+//            }
         }
     }
     
     @IBAction func redBtnClicked(_ sender: Any) {
-        pageController.setViewControllerFromIndex(index: 0)
+        pageController?.setViewControllerFromIndex(index: 0)
     }
     @IBAction func blueBtnClicked(_ sender: Any) {
-        pageController.setViewControllerFromIndex(index: 1)
+        pageController?.setViewControllerFromIndex(index: 1)
     }
     @IBAction func yellowBtnClicked(_ sender: Any) {
-        pageController.setViewControllerFromIndex(index: 2)
+        pageController?.setViewControllerFromIndex(index: 2)
     }
     
 }
