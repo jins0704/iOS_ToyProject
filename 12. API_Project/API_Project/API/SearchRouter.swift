@@ -41,16 +41,8 @@ enum SearchRouter: URLRequestConvertible {
         let url = baseURL.appendingPathComponent(path)
         var request = URLRequest(url: url)
         
-        request.method = method
-        
+        request.method = method        
         request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-        
-//        switch self {
-//        case let .SearchPhoto(parameters):
-//            request = try URLEncodedFormParameterEncoder().encode(parameters, into: request)
-//        case let .SearchUser(parameters):
-//            request = try JSONParameterEncoder().encode(parameters, into: request)
-//        }
         
         return request
     }

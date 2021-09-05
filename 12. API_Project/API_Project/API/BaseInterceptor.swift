@@ -11,7 +11,7 @@ import Alamofire
 class BaseInterceptor: RequestInterceptor {
     
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
-        
+        print("interceptor adapt")
         var request = urlRequest
    
         request.addValue("application/json; charset=UTF-8", forHTTPHeaderField: "Content-Type")
@@ -33,7 +33,7 @@ class BaseInterceptor: RequestInterceptor {
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        
+        print("interceptor retry")
         guard let statusCode = request.response?.statusCode else{
             completion(.doNotRetry)
             return

@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct results : Codable{
+    var photos: [Photo]?
+}
+
 struct Photo : Codable {
     var thumbnial : String
     var username : String
